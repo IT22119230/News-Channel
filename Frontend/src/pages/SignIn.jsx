@@ -1,46 +1,47 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInStart, signInSuccess, singInFailure } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function SignIn() {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize navigate for redirection
+  const dispatch = useDispatch();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload
-
-    // Example API endpoint
-    const apiUrl = "/api/auth/signin";
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Sign-in successful:", data);
-        alert("Sign-in successful!");
-        navigate("/");
-      } else {
-        console.error("Sign-in failed:", data);
-        setError(data.message || "Sign-in failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error during sign-in:", error);
-      setError("Something went wrong. Please try again.");
+    e.preventDefault();
+    if (!formData.email || !formData.password) {
+        dispatch(singInFailure("Please fill all fields"));
+        return;
     }
-  };
+    try {
+        dispatch(signInStart());
+        const res = await fetch('/api/auth/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+                photo: formData.profilePicture,
+            }),
+        });
+
+        const data = await res.json();
+        if (data.success === false) {
+            dispatch(singInFailure(data.message));
+            return;
+        }
+        dispatch(signInSuccess(data));
+        navigate('/');
+    } catch (error) {
+        dispatch(singInFailure(error.message));
+    }
+}
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
