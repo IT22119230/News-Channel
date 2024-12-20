@@ -103,3 +103,19 @@ export const Getnews= async(req,res,next)=>{
   console.log(err);
   res.status (500). send({status: "Error with deleting data", error: err.message});
   })}
+
+
+  export const getNewsBySlug = async (req, res, next) => {
+    const { slug } = req.params;
+  
+    try {
+      const newsItem = await News.findOne({ slug }); // Fetch by slug
+      if (!newsItem) {
+        return res.status(404).json({ message: 'News not found' });
+      }
+      res.status(200).json(newsItem);
+    } catch (error) {
+      console.error('Error fetching news by slug:', error);
+      next(error);
+    }
+  };

@@ -128,7 +128,7 @@ export default function UpdateNews() {
                     id="newsName"
                     className="flex-1"
                     onChange={(e) => setFormData({ ...formData, Newsname: e.target.value })}
-                    value={formData.Newsname || Newsname}
+                    value={formData.Newsname }
                 />
                    <Select
     className="text-black"

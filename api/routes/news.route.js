@@ -1,6 +1,6 @@
 import express from 'express';
 import { verifyToken } from '../utils/verifyUser.js';
-import { Create, getnews, deleteNews, Getnews, updatenews, Delete } from '../controllers/news.controller.js';
+import { Create, getnews, deleteNews, Getnews, updatenews, Delete, getNewsBySlug } from '../controllers/news.controller.js';
 
 const router = express.Router();
 
@@ -10,5 +10,6 @@ router.delete('/delete/:id', verifyToken, deleteNews);
 router.get('/getnews/:id',Getnews);
 router.put('/updatenews/:id',updatenews);
 router.delete('/delete/:id',Delete);
+router.get('/getnewsbyslug/:slug', getNewsBySlug);
 
 export default router;

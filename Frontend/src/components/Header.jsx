@@ -92,16 +92,16 @@ export default function Header() {
         {/* Second Line: Scrollable Header Topics */}
         <div className="lg:hidden overflow-x-auto py-2 scrollbar-hidden">
           <div className="flex space-x-6 min-w-[600px]">
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">U.S. News</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Decision 2024</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Politics</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">World</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Business</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Sports</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Investigations</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Culture & Trends</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Health</a>
-            <a href="#" className="text-sm font-semibold whitespace-nowrap">Science</a>
+            <a href="/" className="text-sm font-semibold whitespace-nowrap">U.S. News</a>
+            <a href="/" className="text-sm font-semibold whitespace-nowrap">Decision 2024</a>
+            <a href="/politics" className="text-sm font-semibold whitespace-nowrap">Politics</a>
+            <a href="/world" className="text-sm font-semibold whitespace-nowrap">World</a>
+            <a href="/business" className="text-sm font-semibold whitespace-nowrap">Business</a>
+            <a href="/sports" className="text-sm font-semibold whitespace-nowrap">Sports</a>
+            <a href="/investigations" className="text-sm font-semibold whitespace-nowrap">Investigations</a>
+            <a href="/culture" className="text-sm font-semibold whitespace-nowrap">Culture & Trends</a>
+            <a href="/health" className="text-sm font-semibold whitespace-nowrap">Health</a>
+            <a href="/science" className="text-sm font-semibold whitespace-nowrap">Science</a>
           </div>
         </div>
 
@@ -119,16 +119,16 @@ export default function Header() {
 
           {/* Center: Header Topics */}
           <nav className="flex space-x-8">
-            <a href="#" className="text-sm font-semibold">U.S. News</a>
-            <a href="#" className="text-sm font-semibold">Decision 2024</a>
-            <a href="#" className="text-sm font-semibold">Politics</a>
-            <a href="#" className="text-sm font-semibold">World</a>
-            <a href="#" className="text-sm font-semibold">Business</a>
-            <a href="#" className="text-sm font-semibold">Sports</a>
-            <a href="#" className="text-sm font-semibold">Investigations</a>
-            <a href="#" className="text-sm font-semibold">Culture & Trends</a>
-            <a href="#" className="text-sm font-semibold">Health</a>
-            <a href="#" className="text-sm font-semibold">Science</a>
+          <a href="/" className="text-sm font-semibold whitespace-nowrap">U.S. News</a>
+            <a href="/" className="text-sm font-semibold whitespace-nowrap">Decision 2024</a>
+            <a href="/politics" className="text-sm font-semibold whitespace-nowrap">Politics</a>
+            <a href="/world" className="text-sm font-semibold whitespace-nowrap">World</a>
+            <a href="/business" className="text-sm font-semibold whitespace-nowrap">Business</a>
+            <a href="/sports" className="text-sm font-semibold whitespace-nowrap">Sports</a>
+            <a href="/investigations" className="text-sm font-semibold whitespace-nowrap">Investigations</a>
+            <a href="/culture" className="text-sm font-semibold whitespace-nowrap">Culture & Trends</a>
+            <a href="/health" className="text-sm font-semibold whitespace-nowrap">Health</a>
+            <a href="/science" className="text-sm font-semibold whitespace-nowrap">Science</a>
           </nav>
 
           {/* Right: Watch Live Button and Toggle Button */}
