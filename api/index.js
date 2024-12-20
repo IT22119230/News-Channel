@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.route.js";
-import userRoute from "./routes/user.route.js"
+import userRoute from "./routes/user.route.js";
+import newsRoute from "./routes/news.route.js"
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute);
+app.use("/api/news",newsRoute);
 
 
 

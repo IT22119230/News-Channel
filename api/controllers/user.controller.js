@@ -27,9 +27,9 @@ export const updateUser = async (req, res, next) => {
     }
   
     try {
-      const { mobile, country, username, password, email, profilePicture, address, interests, language,university } = req.body;
+      const { phoneNumber, country, username, password, email, profilePicture, address,preferredLanguage} = req.body;
       console.log(country)
-      console.log(mobile)
+      console.log(phoneNumber)
 
   
       if (password) {
@@ -44,14 +44,14 @@ export const updateUser = async (req, res, next) => {
         }
         req.body.password = bcryptjs.hashSync(password, 10);
       }
-      if (mobile && country) {
+      if (phoneNumber && country) {
         const countryCode = countryCodeMapping[country];
         if (!countryCode) {
             console.error(`Country "${country}" not found in mapping.`);
             return next(errorHandler(400, 'Invalid country provided'));
         }
     
-        const isValidMobile = validatePhoneNumber(mobile, country);
+        const isValidMobile = validatePhoneNumber(phoneNumber, country);
         if (!isValidMobile) {
             return next(errorHandler(400, 'Invalid mobile number format for the given country'));
         }
@@ -78,12 +78,9 @@ export const updateUser = async (req, res, next) => {
             password: req.body.password, 
             profilePicture,
             address,
-            mobile,
-            country,
-            interests, 
-            language,
-            university,
-            location: req.body.location,
+            phoneNumber,
+            country, 
+            preferredLanguage
           },
         },
         { new: true } 

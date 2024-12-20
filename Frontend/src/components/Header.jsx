@@ -1,9 +1,26 @@
+
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
+import { signOut } from "../redux/user/userSlice";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+        await fetch("/api/user/signout");
+        dispatch(signOut());
+        navigate("/");
+    } catch (error) {
+        console.log(error);
+    }
+};
 
   return (
     <header className="bg-[#0b1c3d] text-white">
@@ -26,9 +43,49 @@ export default function Header() {
             <button className="text-sm font-semibold text-red-500 hover:underline">
               ● WATCH LIVE
             </button>
-            <Link to="/menu" className="text-white"> {/* Use Link instead of <a> */}
-              <FaBars size={24} />
-            </Link>
+            {currentUser ? (
+                        <div className="relative flex-shrink-0 mt-4 md:mt-0">
+                            <button
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                className="flex items-center space-x-2 focus:outline-none"
+                            >
+                                <img
+                                    src={currentUser.profilePicture}
+                                    alt="user"
+                                    className="h-10 w-10 rounded-full"
+                                />
+                            </button>
+
+                            {dropdownOpen && (
+                                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
+                                    <div className="px-4 py-2">
+                                        <span className="block text-sm font-medium text-gray-900">{currentUser.username}</span>
+                                        <span className="block text-sm text-gray-500">{currentUser.email}</span>
+                                    </div>
+                                    <Link
+                                        to="/dashboard?tab=profile"
+                                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setDropdownOpen(false)} // Close dropdown when clicking the link
+                                    >
+                                        Profile
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            handleSignOut();
+                                            setDropdownOpen(false); // Close dropdown when signing out
+                                        }}
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        Sign Out
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    ) : (<Link to="/menu" className="text-white"> {/* Use Link instead of <a> */}
+                      <FaBars size={24} />
+                    </Link>
+                        
+                    )}
           </div>
         </div>
 
@@ -79,9 +136,49 @@ export default function Header() {
             <button className="text-sm font-semibold text-red-500 hover:underline">
               ● WATCH LIVE
             </button>
-            <Link to="/menu" className="text-white"> {/* Use Link instead of <a> */}
-              <FaBars size={24} />
-            </Link>
+            {currentUser ? (
+                        <div className="relative flex-shrink-0 mt-4 md:mt-0">
+                            <button
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                                className="flex items-center space-x-2 focus:outline-none"
+                            >
+                                <img
+                                    src={currentUser.profilePicture}
+                                    alt="user"
+                                    className="h-10 w-10 rounded-full"
+                                />
+                            </button>
+
+                            {dropdownOpen && (
+                                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
+                                    <div className="px-4 py-2">
+                                        <span className="block text-sm font-medium text-gray-900">{currentUser.username}</span>
+                                        <span className="block text-sm text-gray-500">{currentUser.email}</span>
+                                    </div>
+                                    <Link
+                                        to="/dashboard?tab=profile"
+                                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setDropdownOpen(false)} // Close dropdown when clicking the link
+                                    >
+                                        Profile
+                                    </Link>
+                                    <button
+                                        onClick={() => {
+                                            handleSignOut();
+                                            setDropdownOpen(false); // Close dropdown when signing out
+                                        }}
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        Sign Out
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    ) : (<Link to="/menu" className="text-white"> {/* Use Link instead of <a> */}
+                      <FaBars size={24} />
+                    </Link>
+                        
+                    )}
           </div>
         </div>
       </div>

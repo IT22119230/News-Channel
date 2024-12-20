@@ -26,6 +26,18 @@ export const signup = async (req, res, next) => {
       return next(errorHandler(400, "Invalid phone number format"));
     }
 
+    if (password) {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,}$/;
+            if (!passwordRegex.test(password)) {
+              return next(
+                errorHandler(
+                  400,
+                  'Password should be at least 5 characters long and contain at least one uppercase letter, one digit, and one symbol (!@#$%^&*()_+).'
+                )
+              );
+            }
+            req.body.password = bcryptjs.hashSync(password, 10);
+          }
     // Hash Password
     const hashedPassword = await bcryptjs.hash(password, 10);
 

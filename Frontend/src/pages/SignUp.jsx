@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import OAuthenticate from "../components/OAuthenticate";
 
 export default function SignUp() {
   // State to hold form inputs
@@ -195,6 +196,7 @@ export default function SignUp() {
               Sign Up
             </button>
           </div>
+          <OAuthenticate/>
 
           {/* Sign In Link */}
           <p className="text-center text-sm text-gray-600">
